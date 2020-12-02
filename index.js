@@ -88,17 +88,22 @@ Use the finalScore function below to do the following:
 */
 
 function finalScore(inn, num){
-  let final = [];
+  let inning = inn;
+  let here = [];
+  let there = [];
+  let scores = {};
+
   for (let i = 0; i < num; i++){
-    final.push(inning());
+    here.push(inning());
+    there.push(inning());
   }
-  let sum1 = final.reduce((a, b) => a + b, 0) //able to update score and return one team, need other team
-  let scores = {}; //putting the scores into an object
-  scores.home = sum1;
-  scores.away = sum1;
-  console.log(scores);
+    let sum1 = here.reduce((a, b) => a + b, 0);
+    let sum2 = there.reduce((a,b) => a + b, 0);
+    scores.home = sum1;
+    scores.away = sum2;
+    console.log(scores);
 }
-finalScore(inn, 9);
+finalScore(inning, 9);
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -106,10 +111,11 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(num) {
+  //return object with score for home and away
+  console.log(finalScore(inning, num)) ;
 }
-
+getInningScore(3);
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -152,10 +158,10 @@ Use the scoreboard function below to do the following:
 ]
   */
 
-function scoreboard(/* CODE HERE */) {
+function scoreboard(score, inn, num) {
   /* CODE HERE */
 }
-
+scoreboard(getInningScore, inning, 9);
 
 
 

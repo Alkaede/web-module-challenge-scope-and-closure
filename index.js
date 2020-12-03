@@ -2,13 +2,13 @@
 
 /**Example Task : processFirstItem()
  * This example shows how you might go about solving the rest of the tasks
- * 
+ *
  * Use the higher order function processFirstItem below to do the following:
  *  1. Receive an array of strings in a parameter
  *  2. Receive a callback function that takes a string as its argument in a parameter
- *  3. Return the result of invoking the callback function and passing in the FIRST 
+ *  3. Return the result of invoking the callback function and passing in the FIRST
  *     element in the array as the argument
- * 
+ *
  * The following code is demonstrating a way of completing this task
  * It returns the string `foofoo`
 */
@@ -24,15 +24,17 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
 ///// M V P ///////
 
 /*Task 1: counterMaker()
-  
+
   Study the code for counter1 and counter2, then answer the questions below.
-  
+
   1. What is the difference between counter1 and counter2?
-  
+    // counter2 has a global scope whereas counter1 has a more closed off scope
   2. Which of the two uses a closure? How can you tell?
-  
-  3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+    // counter 1 has the closure, you can tell by the function being returned and the scope that it is using to save values.
+  3. In what scenario would the counter1 code be preferable? In what scenario would
+     counter2 be better?
+    //  Counter1 would be good when we want to add onto a variable and keep it counting whenever we need to access it, counter 2 would be best if we needed to reaccess the global scope for a different function
+    scenarios
 */
 
 // counter1 code
@@ -56,44 +58,64 @@ function counter2() {
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
 Use the inning function below to do the following:
   1. Return a random whole number of points between 0 and 2 scored by one team in an inning
-  
+
   For example: invoking inning() should return a numerical score value of 0, 1, or 2
-  
+
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inn(){
+  let num = 0;
+  return function(){
+    return (num + Math.floor((Math.random()*3)));;
+  }
 }
-
+const inning = inn();
+console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
-  1. Receive the callback function `inning` that was created in Task 2 
+  1. Receive the callback function `inning` that was created in Task 2
   2. Receive a number of innings to be played
   3. After each inning, update the score of the home and away teams
   4. After the last inning, return an object containing the final (total) score of the innings played
-  
+
   For example: invoking finalScore(inning, 9) might return this object:
 {
   "Home": 11,
   "Away": 5
 }
-*/ 
+*/
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inn, num){
+  let inning = inn;
+  let here = [];
+  let there = [];
+  let scores = {};
+
+  for (let i = 0; i < num; i++){
+    here.push(inning());
+    there.push(inning());
+  }
+    let sum1 = here.reduce((a, b) => a + b, 0);
+    let sum2 = there.reduce((a,b) => a + b, 0);
+    scores.Home = sum1;
+    scores.Away = sum2;
+    return scores;
 }
+finalScore(inning, 9);
+
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
-  1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
+  1. Receive a callback function - you will pass in the inning function from task 2 as your argument
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(num) {
+  //return object with score for home and away
+  return finalScore(inning, num);
 }
-
+getInningScore(3);
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -104,42 +126,42 @@ Use the scoreboard function below to do the following:
   Home and Away team's scores for each inning.  Not the cummulative score.
   5. If there's a tie at the end of the innings, add this message containing the score to the end of the array:  "This game will require extra innings: Away 12 - Home 12"  (see tie example below)
      If there isn't a tie, add this message to the end of the array: "Final Score: Away 13 - Home 11"  (see no tie example below)
-  
-  NO TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
+
+  NO TIE example: invoking scoreboard(getInningScore,inning, 9) might return
   an array of strings like this:
 [
-  "Inning 1: Away 1 - Home 2", 
+  "Inning 1: Away 1 - Home 2",
   "Inning 2: Away 2 - Home 1",
-  "Inning 3: Away 0 - Home 2", 
-  "Inning 4: Away 2 - Home 2", 
-  "Inning 5: Away 2 - Home 0", 
-  "Inning 6: Away 1 - Home 1", 
-  "Inning 7: Away 0 - Home 2", 
+  "Inning 3: Away 0 - Home 2",
+  "Inning 4: Away 2 - Home 2",
+  "Inning 5: Away 2 - Home 0",
+  "Inning 6: Away 1 - Home 1",
+  "Inning 7: Away 0 - Home 2",
   "Inning 8: Away 2 - Home 2",
-  "Inning 9: Away 1 - Home 0", 
-  "Final Score: Away 11 - Home 12"  
+  "Inning 9: Away 1 - Home 0",
+  "Final Score: Away 11 - Home 12"
 ]
 
-  TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
+  TIE example: invoking scoreboard(getInningScore,inning, 9) might return
   an array of strings like this:
 [
-  "Inning 1: Away 1 - Home 1", 
+  "Inning 1: Away 1 - Home 1",
   "Inning 2: Away 2 - Home 2",
-  "Inning 3: Away 1 - Home 0", 
-  "Inning 4: Away 1 - Home 2", 
-  "Inning 5: Away 0 - Home 0", 
-  "Inning 6: Away 2 - Home 1", 
-  "Inning 7: Away 0 - Home 2", 
+  "Inning 3: Away 1 - Home 0",
+  "Inning 4: Away 1 - Home 2",
+  "Inning 5: Away 0 - Home 0",
+  "Inning 6: Away 2 - Home 1",
+  "Inning 7: Away 0 - Home 2",
   "Inning 8: Away 2 - Home 1",
-  "Inning 9: Away 1 - Home 1", 
+  "Inning 9: Away 1 - Home 1",
   "This game will require extra innings: Away 10 - Home 10"
-]  
+]
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
-}
+function scoreboard() {
 
+}
+scoreboard(getInningScore, inning, 9);
 
 
 

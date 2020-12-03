@@ -43,6 +43,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+  closure is the usage of a function and lexical environment inside of a function
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -64,9 +65,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+  The closure in the code is line 51, where the anonymous function is declared 
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+  The math.random isn't generating the number 6 in its roll so you would have to make it *7 to include 6 in the roll. As for his roll, it is always changing values and sometimes being equal.
 c. What is the lexical scope of `newRoll`? 
-
+  const newRoll
 
 ### Task 3 - Stretch Goals
 

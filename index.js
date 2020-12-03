@@ -99,9 +99,9 @@ function finalScore(inn, num){
   }
     let sum1 = here.reduce((a, b) => a + b, 0);
     let sum2 = there.reduce((a,b) => a + b, 0);
-    scores.home = sum1;
-    scores.away = sum2;
-    console.log(scores);
+    scores.Home = sum1;
+    scores.Away = sum2;
+    return scores;
 }
 finalScore(inning, 9);
 
@@ -113,7 +113,7 @@ Use the getInningScore() function below to do the following:
 
 function getInningScore(num) {
   //return object with score for home and away
-  console.log(finalScore(inning, num)) ;
+  return finalScore(inning, num);
 }
 getInningScore(3);
 
@@ -158,8 +158,8 @@ Use the scoreboard function below to do the following:
 ]
   */
 
-function scoreboard(score, inn, num) {
-  /* CODE HERE */
+function scoreboard() {
+
 }
 scoreboard(getInningScore, inning, 9);
 
